@@ -1,0 +1,5 @@
+tom 37.2 Y Seoul
+emily 36.5 N Incheon
+erin 38.1 Y Daegu
+elsa 38.4 Y Seoul
+mia 36.4 Y Ulsan
