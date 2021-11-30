@@ -19,7 +19,7 @@ void Manager::run(const char* command)
 {
     fin.open(command);//command.txt open
     flog.open("log.txt", ios::app);//log.txt open
-    if (!fin)//ºó ÆÄÀÏÀÌ¸é ¿À·ù Ãâ·Â
+    if (!fin)//ë¹ˆ íŒŒì¼ì´ë©´ ì˜¤ë¥˜ ì¶œë ¥
     {
         flog << "File Open Error" << endl;
         return;
@@ -29,41 +29,41 @@ void Manager::run(const char* command)
 
     while (!fin.eof())
     {
-        fin.getline(cmd, 32);//command.txt 1ÁÙ ÀĞ±â
+        fin.getline(cmd, 32);//command.txt 1ì¤„ ì½ê¸°
         char* tmp;
-        strtok_s(cmd, " ", &tmp);//" "±âÁØÀ¸·Î ¾Õ¿¡ ¹®ÀÚ cmd¿¡ ÀúÀå ³²Àº ¹®ÀÚ tmpÀÇ ÁÖ¼Ò¿¡ ÀúÀå
+        strtok_s(cmd, " ", &tmp);//" "ê¸°ì¤€ìœ¼ë¡œ ì•ì— ë¬¸ì cmdì— ì €ì¥ ë‚¨ì€ ë¬¸ì tmpì˜ ì£¼ì†Œì— ì €ì¥
         if (!strcmp(cmd, "LOAD"))
         {
-            if (LOAD()) { PrintSuccess(cmd); }//¼º°øÇßÀ¸¸é successÃâ·Â
-            else { PrintErrorCode(100); }//½ÇÆĞÇßÀ¸¸é errorÃâ·Â
+            if (LOAD()) { PrintSuccess(cmd); }//ì„±ê³µí–ˆìœ¼ë©´ successì¶œë ¥
+            else { PrintErrorCode(100); }//ì‹¤íŒ¨í–ˆìœ¼ë©´ errorì¶œë ¥
         }
 
         else if (!strcmp(cmd, "ADD")) {
-            if (ADD(tmp)) { PrintSuccess(cmd); }//¼º°øÇßÀ¸¸é successÃâ·Â
-            else { PrintErrorCode(200); }//½ÇÆĞÇßÀ¸¸é errorÃâ·Â
+            if (ADD(tmp)) { PrintSuccess(cmd); }    //success
+            else { PrintErrorCode(200); }           //errorì¶œë ¥
         }
 
         else if (!strcmp(cmd, "QPOP")) {
-            if (QPOP(stoi(tmp))) { PrintSuccess(cmd); }//¼º°øÇßÀ¸¸é successÃâ·Â
-            else { PrintErrorCode(300); }//½ÇÆĞÇßÀ¸¸é errorÃâ·Â
+            if (QPOP(stoi(tmp))) { PrintSuccess(cmd); } //successì¶œë ¥
+            else { PrintErrorCode(300); }               //error
         }
 
-        else if (!strcmp(cmd, "SEARCH")) {//SEARCH¿¡ ³²Àº ¹®ÀÚ Àü´Ş
+        else if (!strcmp(cmd, "SEARCH")) {//SEARCHì— ë‚¨ì€ ë¬¸ì ì „ë‹¬
             SEARCH(tmp);
         }
 
-        else if (!strcmp(cmd, "PRINT")) {//PRINT¿¡ ³²Àº ¹®ÀÚ Àü´Ş
+        else if (!strcmp(cmd, "PRINT")) {//PRINTì— ë‚¨ì€ ë¬¸ì ì „ë‹¬
             PRINT(tmp);
         }
 
         else if (!strcmp(cmd, "BPOP")) {
-            if (BPOP(tmp)) { PrintSuccess(cmd); }//¼º°øÇßÀ¸¸é successÃâ·Â
-            else { PrintErrorCode(600); }//½ÇÆĞÇßÀ¸¸é errorÃâ·Â
+            if (BPOP(tmp)) { PrintSuccess(cmd); }//ì„±ê³µí–ˆìœ¼ë©´ successì¶œë ¥
+            else { PrintErrorCode(600); }//ì‹¤íŒ¨í–ˆìœ¼ë©´ errorì¶œë ¥
         }
 
         else if (!strcmp(cmd, "EXIT"))
         {
-            PrintSuccess(cmd);//¼º°øÇßÀ¸¸é successÃâ·Â
+            PrintSuccess(cmd);//ì„±ê³µí–ˆìœ¼ë©´ successì¶œë ¥
             break;
         }
 
@@ -152,8 +152,8 @@ bool Manager::ADD(char* patient)
 
 bool Manager::QPOP(int n)
 {
-    if (ds_queue->size() < n) { return 0; }//QPOPÇÏ·Á´Â ¼öº¸´Ù size°¡ ÀÛÀ¸¸é Á¾·á
-    for (int i = 0; i < n; i++) {//QPOP ¼ıÀÚ ¸¸Å­ ¹İº¹
+    if (ds_queue->size() < n) { return 0; }//QPOPí•˜ë ¤ëŠ” ìˆ˜ë³´ë‹¤ sizeê°€ ì‘ìœ¼ë©´ ì¢…ë£Œ
+    for (int i = 0; i < n; i++) {//QPOP ìˆ«ì ë§Œí¼ ë°˜ë³µ
         ds_bst->Insert_Patient(ds_queue->front());
         ds_queue->pop();
     }
@@ -162,17 +162,17 @@ bool Manager::QPOP(int n)
 
 bool Manager::SEARCH(char* r)
 {
-    if (!ds_bst->Search(r)) { PrintErrorCode(400); return 0; }//SEARCH½ÇÆĞÇÏ¸é ERRORÃâ·Â ¼º°øÇÏ¸é Ã£Àº È¯ÀÚ Á¤º¸Ãâ·Â
+    if (!ds_bst->Search(r)) { PrintErrorCode(400); return 0; }//SEARCHì‹¤íŒ¨í•˜ë©´ ERRORì¶œë ¥ ì„±ê³µí•˜ë©´ ì°¾ì€ í™˜ì ì •ë³´ì¶œë ¥
     return 1;
 }
 
 bool Manager::PRINT(char* tt)
 {
     char* tn;
-    strtok_s(tt, " ", &tn);//¹Ş¾Æ¿Â ¹®ÀÚ¿­ " "±âÁØÀ¸·Î ºĞÇÒ
+    strtok_s(tt, " ", &tn);//ë°›ì•„ì˜¨ ë¬¸ìì—´ " "ê¸°ì¤€ìœ¼ë¡œ ë¶„í• 
 
     if (!strcmp(tt, "B")) {
-        if (!strcmp(tn, "")) { PrintErrorCode(500); return 0; }//ÀÔ·Â Á¤º¸°¡ ºÎÁ·ÇÏ¸é errorÃâ·Â, Á¾·á
+        if (!strcmp(tn, "")) { PrintErrorCode(500); return 0; }//ì…ë ¥ ì •ë³´ê°€ ë¶€ì¡±í•˜ë©´ errorì¶œë ¥, ì¢…ë£Œ
         tt = strtok_s(tn, " ", &tn);
         cout << "========== " << "PRINT" << " ==========" << endl << "BST" << endl;
         flog << "========== " << "PRINT" << " ==========" << endl << "BST" << endl;
@@ -185,7 +185,7 @@ bool Manager::PRINT(char* tt)
         flog << "============================" << endl << endl;
     }
     else if (!strcmp(tt, "H")) {
-        if (ds_heap->Getsize() == 0) { PrintErrorCode(500); return 0; }//heapÀÌ ºñ¾îÀÖÀ¸¸é errorÃâ·Â, Á¾·á
+        if (ds_heap->Getsize() == 0) { PrintErrorCode(500); return 0; }//heapì´ ë¹„ì–´ìˆìœ¼ë©´ errorì¶œë ¥, ì¢…ë£Œ
         cout << "========== " << "PRINT" << " ==========" << endl;
         flog << "========== " << "PRINT" << " ==========" << endl;
         ds_heap->Print();
